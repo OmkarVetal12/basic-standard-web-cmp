@@ -1,45 +1,51 @@
-const template = document.createElement('template');
-template.innerHTML = `
-<style>
-table, th, td {
-  border:1px solid black;
+import React from "react";
+import ReactDOM from "react-dom";
+import reactToWebComponent from "react-to-webcomponent";
 
+interface State {
+  count: number;
 }
-</style>
-  <table>
-  <tr>
-    <th>Header1</th>
-    <th>Header2</th>
-    <th>Header3</th>
-    <th>Header4</th>
-    <th>Header5</th>
-  </tr>
-  <tr>
-    <td>Row1</td>
-    <td>Row2</td>
-    <td>Row3</td>
-    <td>Row4</td>
-    <td>Row5</td>
-  </tr>
-  <tr>
-    <td>Row1</td>
-    <td>Row2</td>
-    <td>Row3</td>
-    <td>Row4</td>
-    <td>Row5</td>
-  </tr>
-</table>`;
+interface Props {}
 
-class myButton extends HTMLElement {
-  constructor() {
-    super();
-    this.count = 0;
-    this.attachShadow({ mode: 'open' });
+export default class MyCounter extends React.Component<Props, State> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
   }
 
-  connectedCallback() {
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  render() {
+    const styles = `.my-counter * {
+      font-size: 200%;
+    }
+
+    .my-counter span {
+      width: 4rem;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .my-counter button {
+      width: 64px;
+      height: 64px;
+      border: none;
+      border-radius: 10px;
+      background-color: seagreen;
+      color: white;
+    }`;
+
+    return (
+      <div className="my-counter">
+        <table>
+          <th>header</th>
+        </table>
+      </div>
+    );
   }
 }
 
-customElements.define('app-button', myButton);
+customElements.define(
+  "my-counter",
+  reactToWebComponent(MyCounter, React, ReactDOM)
+);
