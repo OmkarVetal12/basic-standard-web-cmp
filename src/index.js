@@ -1,51 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import reactToWebComponent from "react-to-webcomponent";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-interface State {
-  count: number;
-}
-interface Props {}
-
-export default class MyCounter extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-    };
-  }
-
-  render() {
-    const styles = `.my-counter * {
-      font-size: 200%;
-    }
-
-    .my-counter span {
-      width: 4rem;
-      display: inline-block;
-      text-align: center;
-    }
-
-    .my-counter button {
-      width: 64px;
-      height: 64px;
-      border: none;
-      border-radius: 10px;
-      background-color: seagreen;
-      color: white;
-    }`;
-
-    return (
-      <div className="my-counter">
-        <table>
-          <th>header</th>
-        </table>
-      </div>
-    );
-  }
-}
-
-customElements.define(
-  "my-counter",
-  reactToWebComponent(MyCounter, React, ReactDOM)
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <my-counter />
+  </React.StrictMode>
 );
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
